@@ -19,8 +19,7 @@
 
 </head>
 
-<body
-    style="background: black; color: white">
+<body style="background: black; color: white">
 
     <div class="container">
 
@@ -155,7 +154,6 @@
         <br>
         <br>
 
-        <!-- Submit Button -->
         <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><i class="fa fa-check-circle"
                 aria-hidden="true"></i>
             Submit</button>
@@ -164,32 +162,30 @@
         <footer class="footer">
             <div class="container">
                 <p><a href="/api/friends">API Friends List</a> | <a
-                        href="https://github.com/afhaque/friendfinder">GitHub Repo</a></p>
+                        href="https://github.com/nguyenc26/Friend-Finder">GitHub Repo</a></p>
             </div>
         </footer>
 
     </div>
 
-    <!-- Modal -->
-    <div id="results-modal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
+    <!-- Modal Section -->
+    <div id="friendModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h2 class="modal-title"><strong>Best Match</strong></h2>
+                    <h3 class="modal-title font-weight-bold">Best Match</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
-                    <h2 id="match-name"></h2>
-                    <img id="match-img"
-                        src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg" alt="">
+                    <h4 id="matchedUserName"></h4>
+                    <img id="matchedUserPhoto" src="" alt="Matched Friend Image" style="height: 300px; width: 100px">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -261,11 +257,11 @@
                 $.post("/api/friends", userData, function (data) {
 
                     // Grab the result from the AJAX post so that the best match's name and photo are displayed.
-                    $("#match-name").text(data.name);
-                    $("#match-img").attr("src", data.photo);
+                    $("#matchedUserName").text(data.name);
+                    $("#matchedUserPhoto").attr("src", data.photo);
 
                     // Show the modal with the best match
-                    $("#results-modal").modal("toggle");
+                    $("#friendModal").modal("toggle");
 
                 });
             } else {
